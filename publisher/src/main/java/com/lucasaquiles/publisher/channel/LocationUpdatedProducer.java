@@ -23,8 +23,10 @@ public class LocationUpdatedProducer {
 
         Message<byte[]> builder = null;
         try {
+            byte[] payload = new ObjectMapper().writeValueAsBytes(locationDTO);
+
             builder = MessageBuilder
-                    .withPayload(new ObjectMapper().writeValueAsBytes(locationDTO))
+                    .withPayload(payload)
                     .build();
         } catch (JsonProcessingException e) {
             e.printStackTrace();

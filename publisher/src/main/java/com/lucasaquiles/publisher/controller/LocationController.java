@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.http.HttpResponse;
 
 @RestController("/location")
 public class LocationController {
@@ -20,6 +21,6 @@ public class LocationController {
 
         locationService.addLocation(request);
 
-        return request;
+        return HttpRespon;
     }
 }
