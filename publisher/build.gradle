@@ -1,9 +1,23 @@
+buildscript{
+    ext {
+        gradleAvroVersion = '0.14.2'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:${gradleAvroVersion}"
+    }
+}
 
 plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
 }
+
+apply plugin: "com.commercehub.gradle.plugin.avro"
+
 
 group = 'com.lucasaquiles'
 version = '0.0.1-SNAPSHOT'
@@ -17,6 +31,10 @@ configurations {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url "http://packages.confluent.io/maven/"
+    }
 }
 
 ext {
@@ -31,6 +49,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-stream'
     implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
     implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
+
+    implementation 'io.confluent:kafka-avro-serializer:4.0.0'
 
     compile 'io.springfox:springfox-swagger-ui:2.9.2'
     compile 'io.springfox:springfox-swagger2:2.9.2'
@@ -53,5 +73,18 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+}
+
+task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
+    source("$rootDir/src/main/resources/avro")
+    outputDir = file("$buildDir/com/lucasaquiles/stream")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir file("$buildDir/com/lucasaquiles/stream")
+        }
+    }
 }
 
