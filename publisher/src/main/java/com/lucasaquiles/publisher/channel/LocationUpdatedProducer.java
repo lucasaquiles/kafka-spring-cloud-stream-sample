@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
@@ -19,15 +20,17 @@ public class LocationUpdatedProducer {
     @SendTo(Processor.OUTPUT)
     public void send(final LocationDTO locationDTO) {
 
-        LocationUpdatedEvent.Builder builder = LocationUpdatedEvent.newBuilder()
+        LocationUpdatedEvent builder = LocationUpdatedEvent.newBuilder()
                 .setLat(locationDTO.getLat()
-                        .longValue()).setLon(locationDTO.getLon().longValue())
-                .setDescription(locationDTO.getDescription());
+                        .doubleValue()).setLon(locationDTO.getLon().doubleValue())
+                .setDescription(locationDTO.getDescription()).build();
+
+        Message<LocationUpdatedEvent> build = MessageBuilder
+                .withPayload(builder)
+                .build();
 
         channel.output()
-                .send(MessageBuilder
-                    .withPayload(builder)
-                    .build());
+                .send(build);
 
         log.info("M=LocationUpdated#send, sent {}", builder);
     }
