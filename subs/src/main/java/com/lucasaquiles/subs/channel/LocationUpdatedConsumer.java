@@ -1,22 +1,17 @@
 package com.lucasaquiles.subs.channel;
 
-import com.lucasaquiles.subs.controller.dto.LocationDTO;
+import com.lucasaquiles.stream.LocationUpdatedEvent;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 public class LocationUpdatedConsumer {
 
-    @Autowired
-    private LocationUpdatedChannel channel;
+    @StreamListener(LocationUpdatedChannel.LOCATION_UPDATED_INPUT)
+    public void proccess(LocationUpdatedEvent event) {
 
-    @StreamListener(Processor.INPUT)
-    public void receive(final LocationDTO locationDTO) {
-
-        log.info("M=LocationUpdated#receive, sent {}", locationDTO);
+        log.info("M=LocationUpdated#proccess, received {}", event);
     }
 }
