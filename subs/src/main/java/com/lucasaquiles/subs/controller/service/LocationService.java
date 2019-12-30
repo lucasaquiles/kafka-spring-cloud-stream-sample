@@ -1,8 +1,8 @@
 package com.lucasaquiles.subs.controller.service;
 
-import com.lucasaquiles.subs.model.Location;
+import com.lucasaquiles.subs.controller.dto.LocationDTO;
 
 public interface LocationService {
 
-    public void addLocation(Location location);
+    void addLocation(LocationDTO location);
 }

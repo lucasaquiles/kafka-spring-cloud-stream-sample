@@ -11,7 +11,10 @@ public class Location {
 
     @Id
     private String id;
+
     private BigDecimal lat;
     private BigDecimal lon;
     private String description;
+
+    private Long deliveryBy;
 }

@@ -1,8 +1,8 @@
 {
   "type": "record",
-  "name": "LocationUpdatedEvent",
+  "name": "DeliveryStartedEvent",
   "namespace": "com.lucasaquiles.stream",
-  "doc": "Update location",
+  "doc": "Delivery was started",
   "version": 1,
   "fields": [
     {
@@ -13,21 +13,18 @@
       "doc": "Longitude"
     },
     {
-      "name": "lon",
+      "name": "from",
       "type": [
-        "double"
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
       ],
-      "doc": "Longitude"
+      "default": null,
+      "doc": "From"
     },
     {
-      "name": "lat",
-      "type": [
-        "double"
-      ],
-      "doc": "Latitude"
-    },
-    {
-      "name": "description",
+      "name": "to",
       "type": [
         {
           "type": "string",
