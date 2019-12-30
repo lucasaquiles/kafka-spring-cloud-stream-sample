@@ -3,13 +3,17 @@
   "name": "LocationUpdatedEvent",
   "namespace": "com.lucasaquiles.stream",
   "doc": "Update location",
-  "version": 1,
+  "version": 2,
   "fields": [
     {
-      "name": "deliveryId",
+      "name": "bagId",
       "type": [
-        "long"
+        "null",
+        {
+          "type": "long"
+        }
       ],
+      "default": null,
       "doc": "Longitude"
     },
     {

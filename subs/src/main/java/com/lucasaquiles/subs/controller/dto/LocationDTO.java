@@ -1,5 +1,6 @@
 package com.lucasaquiles.subs.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,12 +8,13 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LocationDTO {
 
     private BigDecimal lon;
     private BigDecimal lat;
-    private Long deliveryId;
+    private Long bagId;
     private String description;
 }

@@ -21,8 +21,9 @@ public class LocationUpdatedProducer {
     public void send(final LocationDTO locationDTO) {
 
         LocationUpdatedEvent builder = LocationUpdatedEvent.newBuilder()
-                .setLat(locationDTO.getLat()
-                        .doubleValue()).setLon(locationDTO.getLon().doubleValue())
+                .setLat(locationDTO.getLat().doubleValue())
+                .setLon(locationDTO.getLon().doubleValue())
+                .setBagId(locationDTO.getBagId())
                 .setDescription(locationDTO.getDescription()).build();
 
         Message<LocationUpdatedEvent> build = MessageBuilder

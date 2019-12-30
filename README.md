@@ -13,4 +13,6 @@ done
 
 examples with kafka producer and consumers and partitions topic groups
 
-
+```
+docker-compose up --build -d mongodb
+```

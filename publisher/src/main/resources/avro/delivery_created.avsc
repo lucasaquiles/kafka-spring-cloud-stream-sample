@@ -6,15 +6,19 @@
   "version": 1,
   "fields": [
     {
-      "name": "deliveryId",
+      "name": "bagId",
       "type": [
-        "long"
+        "null",
+        {
+          "type": "long"
+        }
       ],
-      "doc": "Longitude"
+      "doc": "package id"
     },
     {
       "name": "from",
       "type": [
+        "null",
         {
           "type": "string",
           "avro.java.string": "String"
@@ -26,6 +30,7 @@
     {
       "name": "to",
       "type": [
+        "null",
         {
           "type": "string",
           "avro.java.string": "String"

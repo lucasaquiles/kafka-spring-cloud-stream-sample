@@ -1,4 +1,4 @@
-package com.lucasaquiles.publisher.controller.service;
+package com.lucasaquiles.publisher.service;
 
 import com.lucasaquiles.publisher.controller.dto.LocationDTO;
 

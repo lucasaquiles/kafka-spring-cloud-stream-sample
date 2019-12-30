@@ -17,14 +17,19 @@ public class DeliveryStartedConsumer {
 
     @StreamListener(DeliveryStartedChannel.DELIVERY_STARTED_INPUT)
     public void proccess(DeliveryStartedEvent event) {
-        Delivery delivery = new Delivery();
 
-        delivery.setFrom((String) event.getFrom());
-        delivery.setTo((String) event.getTo());
-        delivery.setBagId((Long) event.getDeliveryId());
+        try {
+            Delivery delivery = new Delivery();
 
-        deliveryService.save(delivery);
+            delivery.setFrom((String) event.getFrom());
+            delivery.setTo((String) event.getTo());
+            delivery.setBagId((Long) event.getBagId());
 
-        log.info("M=DeliveryStartedConsumer#proccess, received {}", event);
+            deliveryService.save(delivery);
+
+            log.info("M=DeliveryStartedConsumer#proccess, received {}", event);
+        }catch (Exception e) {
+            log.error("M=DeliveryStartedConsumer#error, fail {}", e.getMessage());
+        }
     }
 }
