@@ -4,11 +4,9 @@ import com.lucasaquiles.subs.channel.DeliveryStartedChannel;
 import com.lucasaquiles.subs.channel.LocationUpdatedChannel;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
-@EnableBinding(
-        {
+@EnableBinding( {
                 LocationUpdatedChannel.class,
                 DeliveryStartedChannel.class
-        }
-)
+})
 public class StreamConfig {
 }

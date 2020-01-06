@@ -17,6 +17,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public void save(Delivery delivery) {
 
-        repository.save(delivery);
+        repository.findByBagId(delivery.getBagId())
+                .orElse(repository.save(delivery));
     }
 }

@@ -60,10 +60,16 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+
+	testCompile "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok:"
+
+	testImplementation "com.h2database:h2"
+	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 }
 
 dependencyManagement {

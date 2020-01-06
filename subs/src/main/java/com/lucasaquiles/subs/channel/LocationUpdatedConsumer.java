@@ -25,7 +25,6 @@ public class LocationUpdatedConsumer {
 
             Conversion<BigDecimal> conversion = new Conversions.DecimalConversion();
 
-
             log.info("M=LocationUpdated#proccess, received {}", event);
             locationService.addLocation(
                   LocationDTO.builder()
