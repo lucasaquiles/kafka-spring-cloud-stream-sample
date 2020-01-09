@@ -1,7 +1,6 @@
 # kafka-spring-cloud-stream-example
 
-scenarios using kafka and spring cloud stream
-
+scenarios using kafka, spring cloud stream, socket and webflux
 
 seed
 ```
