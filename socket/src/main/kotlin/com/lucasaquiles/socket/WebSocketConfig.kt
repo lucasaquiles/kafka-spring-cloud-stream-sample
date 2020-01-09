@@ -21,7 +21,7 @@ class WebSocketConfig (
 
         val handlerMapping = SimpleUrlHandlerMapping()
         handlerMapping.urlMap = mapOf(
-                "/ws/teste" to trackingHandler
+                "/ws/tracking" to trackingHandler
         )
         handlerMapping.order = 1
         return handlerMapping
