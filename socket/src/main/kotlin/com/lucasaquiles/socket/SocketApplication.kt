@@ -1,11 +1,15 @@
 package com.lucasaquiles.socket
 
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.WebApplicationType
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class SocketApplication
 
 fun main(args: Array<String>) {
-	runApplication<SocketApplication>(*args)
+
+	val app = SpringApplication(SocketApplication::class.java)
+	app.webApplicationType = WebApplicationType.REACTIVE
+	app.run(*args)
 }

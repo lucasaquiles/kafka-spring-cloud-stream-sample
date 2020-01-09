@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking</title>
+</head>
+<body>
+<h1>Tracking package</h1>
+<div>
+    <div id="clientid">Client ID: </div>
+    <div>-----------------------------</div>
+    <div>Sending random numbers... <span id="rand"></span></div>
+    <div>-----------------------------</div>
+    <div>
+        <h2>Primes:</h2>
+        <div id="primes">
+        </div>
+    </div>
+</div>
+<script>
+        var clientId = parseInt(Math.random()*100000);
+        document.querySelector('#clientid').innerHTML += clientId;
+        var ws = new WebSocket("ws://localhost:8080/ws/teste");
+
+        ws.onopen = function() { console.log('connection established') };
+        ws.onclose = function() { console.log('connection closed') };
+
+        ws.onerror = function(err) { console.log('error: ', err)};
+
+        ws.onmessage = function(message) {
+            var sender = message.data.split(":")[0];
+            var bagId = message.data.split(":")[1];
+            if (sender !== clientId.toString()) {
+                document.getElementById('primes').innerHTML += '<div>' + sender + " found a prime: <b>" + bagId + '</b></div>';
+            }
+        };
+
+<!--        window.setInterval(function() {-->
+<!--            var rand = parseInt(Math.random()*100);-->
+<!--            document.getElementById('rand').innerHTML = rand;-->
+<!--            ws.send(clientId + ":" + rand);-->
+<!--        }, 500);-->
+    </script>
+</body>
+</html>
