@@ -63,7 +63,6 @@ dependencies {
 	testCompile "org.projectlombok:lombok"
 	testAnnotationProcessor "org.projectlombok:lombok:"
 
-	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

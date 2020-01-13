@@ -10,9 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
@@ -20,13 +18,19 @@ import java.util.Optional;
 import static org.springframework.messaging.support.MessageBuilder.withPayload;
 
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureDataMongo
 public class DeliveryStartedIntegrationTest{
 
     private final DeliveryStartedChannel deliveryStartedChannel;
 
     private final DeliveryRepository deliveryRepository;
+
+    @BeforeAll
+    public void setUp() {
+
+        deliveryRepository.deleteAll();
+    }
 
     @Autowired
     public DeliveryStartedIntegrationTest(DeliveryStartedChannel deliveryStartedChannel, DeliveryRepository deliveryRepository) {
