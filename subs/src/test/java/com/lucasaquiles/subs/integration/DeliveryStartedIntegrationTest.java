@@ -6,10 +6,13 @@ import com.lucasaquiles.subs.model.Delivery;
 import com.lucasaquiles.subs.repository.DeliveryRepository;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
@@ -17,8 +20,8 @@ import java.util.Optional;
 import static org.springframework.messaging.support.MessageBuilder.withPayload;
 
 @ActiveProfiles("test")
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureDataMongo
 public class DeliveryStartedIntegrationTest{
 
     private final DeliveryStartedChannel deliveryStartedChannel;

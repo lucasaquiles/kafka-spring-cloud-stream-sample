@@ -45,7 +45,6 @@ ext {
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 	implementation 'org.apache.kafka:kafka-streams'
@@ -64,9 +63,8 @@ dependencies {
 	testCompile "org.projectlombok:lombok"
 	testAnnotationProcessor "org.projectlombok:lombok:"
 
-	testImplementation "com.h2database:h2"
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
-
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
