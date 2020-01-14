@@ -1,12 +1,11 @@
 package com.lucasaquiles.subs.controller.service;
 
 import com.lucasaquiles.subs.model.Delivery;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 public interface DeliveryService {
 
     void save(Delivery delivery);
 
-    Optional<Delivery> getById(Long id);
+    Mono<Delivery> getById(Long id);
 }

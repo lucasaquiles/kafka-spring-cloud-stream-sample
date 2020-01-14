@@ -18,7 +18,7 @@ import java.util.List;
 public class Delivery {
 
     private String id;
-    private Long bagId;
+    private String bagId;
     private String from;
     private String to;
 

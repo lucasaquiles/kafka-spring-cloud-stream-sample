@@ -21,7 +21,7 @@ public class DeliveryStartedProducer {
     public void send(final DeliveryDTO deliveryDTO) {
 
         DeliveryStartedEvent builder = DeliveryStartedEvent.newBuilder()
-                .setBagId(Long.parseLong(deliveryDTO.getBagId()))
+                .setBagId(deliveryDTO.getBagId())
                 .setFrom(deliveryDTO.getFrom())
                 .setTo(deliveryDTO.getTo())
                 .build();

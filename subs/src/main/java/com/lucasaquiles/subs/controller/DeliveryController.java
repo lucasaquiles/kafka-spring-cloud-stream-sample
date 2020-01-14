@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
@@ -18,10 +19,9 @@ public class DeliveryController {
     private DeliveryService deliveryService;
 
     @GetMapping("/{id}/")
-    public ResponseEntity<Delivery> get(@Valid @PathVariable Long id) {
+    public ResponseEntity<Mono<Delivery>> get(@Valid @PathVariable Long id) {
 
-        Delivery delivery = deliveryService.getById(id)
-                .get();
+        Mono<Delivery> delivery = deliveryService.getById(id);
 
         return new ResponseEntity<>(
                 delivery,

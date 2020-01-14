@@ -18,5 +18,5 @@ public class Location {
     private BigDecimal lon;
     private String description;
 
-    private Long deliveryBy;
+    private String deliveryBy;
 }

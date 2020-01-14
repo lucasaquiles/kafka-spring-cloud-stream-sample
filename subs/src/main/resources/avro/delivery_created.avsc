@@ -3,14 +3,14 @@
   "name": "DeliveryStartedEvent",
   "namespace": "com.lucasaquiles.stream",
   "doc": "Delivery was started",
-  "version": 1,
+  "version": 2,
   "fields": [
     {
       "name": "bagId",
       "type": [
-        "null",
         {
-          "type": "long"
+          "type": "string",
+          "avro.java.string": "String"
         }
       ],
       "doc": "package id"

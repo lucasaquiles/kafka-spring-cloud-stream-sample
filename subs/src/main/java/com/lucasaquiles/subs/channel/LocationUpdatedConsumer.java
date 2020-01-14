@@ -28,7 +28,7 @@ public class LocationUpdatedConsumer {
             log.info("M=LocationUpdated#proccess, received {}", event);
             locationService.addLocation(
                   LocationDTO.builder()
-                          .bagId(event.getBagId())
+                          .bagId(String.valueOf(event.getBagId()))
                           .lat(BigDecimal.valueOf(((Double) event.getLat()).doubleValue()))
                           .lon(BigDecimal.valueOf(((Double) event.getLon()).doubleValue()))
                           .build()

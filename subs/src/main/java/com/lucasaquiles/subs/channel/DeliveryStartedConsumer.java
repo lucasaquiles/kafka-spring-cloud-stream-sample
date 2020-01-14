@@ -23,7 +23,7 @@ public class DeliveryStartedConsumer {
 
             delivery.setFrom((String) event.getFrom());
             delivery.setTo((String) event.getTo());
-            delivery.setBagId((Long) event.getBagId());
+            delivery.setBagId((String) event.getBagId());
 
             deliveryService.save(delivery);
 

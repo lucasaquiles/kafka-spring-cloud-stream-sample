@@ -10,8 +10,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -52,8 +54,8 @@ public class DeliveryStartedIntegrationTest{
                 .send(withPayload(message)
                         .build());
 
-        Optional<Delivery> byBagId = deliveryRepository.findByBagId(2L);
+        Mono<Delivery> byBagId = deliveryRepository.findByBagId("1234");
 
-        Assert.assertThat(byBagId.isPresent(), Matchers.is(true));
+        Assert.assertThat(byBagId.block(), Matchers.notNullValue());
     }
 }

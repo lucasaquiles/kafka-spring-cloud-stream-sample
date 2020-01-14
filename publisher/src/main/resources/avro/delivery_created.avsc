@@ -8,9 +8,9 @@
     {
       "name": "bagId",
       "type": [
-        "null",
         {
-          "type": "long"
+          "type": "string",
+          "avro.java.string": "String"
         }
       ],
       "doc": "package id"

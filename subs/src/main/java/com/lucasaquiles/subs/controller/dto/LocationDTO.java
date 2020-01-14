@@ -15,6 +15,6 @@ public class LocationDTO {
 
     private BigDecimal lon;
     private BigDecimal lat;
-    private Long bagId;
+    private String bagId;
     private String description;
 }

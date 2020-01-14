@@ -2,13 +2,14 @@ package com.lucasaquiles.subs.controller.service;
 
 import com.lucasaquiles.subs.model.Delivery;
 import com.lucasaquiles.subs.repository.DeliveryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
+@Slf4j
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
 
@@ -17,14 +18,18 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void save(Delivery delivery) {
+    public void save(final Delivery delivery) {
 
         deliveryRepository.findByBagId(delivery.getBagId())
-                .orElse(deliveryRepository.save(delivery));
+               .switchIfEmpty(
+                       deliveryRepository.save(delivery)
+               );
+
+        log.info("M=DeliveryService#save save = {}", delivery);
     }
 
     @Override
-    public Optional<Delivery> getById(Long id) {
+    public Mono<Delivery> getById(final Long id) {
 
         return deliveryRepository.findById(String.valueOf(id));
     }

@@ -3,14 +3,14 @@
   "name": "LocationUpdatedEvent",
   "namespace": "com.lucasaquiles.stream",
   "doc": "Update location",
-  "version": 2,
+  "version": 3,
   "fields": [
     {
       "name": "bagId",
       "type": [
-        "null",
         {
-          "type": "long"
+          "type": "string",
+          "avro.java.string": "String"
         }
       ],
       "default": null,

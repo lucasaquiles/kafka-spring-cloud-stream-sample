@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
@@ -23,10 +24,12 @@ public class LocationServiceImpl implements LocationService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void addLocation(LocationDTO locationDTO) {
+    public void addLocation(final LocationDTO locationDTO) {
 
-        Delivery delivery = deliveryRepository.findByBagId(locationDTO.getBagId())
-                .orElseThrow(() -> new RuntimeException("Delivery was not started"));
+        Mono<Delivery> delivery = deliveryRepository.findByBagId(locationDTO.getBagId())
+                .switchIfEmpty(Mono.error(
+                        () -> new RuntimeException("Delivery was not started")
+                ));
 
         Location location = new Location();
 
@@ -37,9 +40,9 @@ public class LocationServiceImpl implements LocationService {
 
         locationRepository.save(location);
 
-        delivery.addLocation(location);
+        delivery.block().addLocation(location);
 
         log.info("M=addLocation, saving -> {}", locationDTO);
-        deliveryRepository.save(delivery);
+        deliveryRepository.save(delivery.block());
     }
 }
