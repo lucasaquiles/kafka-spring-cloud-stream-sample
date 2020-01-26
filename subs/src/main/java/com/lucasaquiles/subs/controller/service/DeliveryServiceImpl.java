@@ -21,9 +21,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     public void save(final Delivery delivery) {
 
         deliveryRepository.findByBagId(delivery.getBagId())
-               .switchIfEmpty(
-                       deliveryRepository.save(delivery)
-               );
+                .switchIfEmpty(
+                        deliveryRepository.save(delivery)
+                );
 
         log.info("M=DeliveryService#save save = {}", delivery);
     }
