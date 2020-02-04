@@ -9,16 +9,17 @@
 <div>
     <div id="clientid">Client ID: </div>
     <div>-----------------------------</div>
-    <div>Sending random numbers... <span id="rand"></span></div>
+    <div>tracking <span id="rand"></span></div>
     <div>-----------------------------</div>
     <div>
-        <h2>Primes:</h2>
-        <div id="primes">
+        <h2>Tracking:</h2>
+        <div id="position">
         </div>
     </div>
 </div>
 <script>
         var clientId = parseInt(Math.random()*100000);
+
         document.querySelector('#clientid').innerHTML += clientId;
         var ws = new WebSocket("ws://localhost:9012/ws/tracking");
 
@@ -28,18 +29,24 @@
         ws.onerror = function(err) { console.log('error: ', err)};
 
         ws.onmessage = function(message) {
-            var sender = message.data.split(":")[0];
-            var bagId = message.data.split(":")[1];
-            if (sender !== clientId.toString()) {
-                document.getElementById('primes').innerHTML += '<div>' + sender + " found a prime: <b>" + bagId + '</b></div>';
+
+            var obj = JSON.parse(message.data);
+            console.log("message: ", obj);
+
+            if (obj.sender !== clientId.toString()) {
+                document.getElementById('position').innerHTML += '<div>' + obj.sender + " : <b>" + obj.bagId + '</b></div>';
             }
         };
 
-<!--        window.setInterval(function() {-->
-<!--            var rand = parseInt(Math.random()*100);-->
-<!--            document.getElementById('rand').innerHTML = rand;-->
-<!--            ws.send(clientId + ":" + rand);-->
-<!--        }, 500);-->
+        window.setInterval(function() {
+
+            var rand = parseInt(Math.random()*100);
+            document.getElementById('rand').innerHTML = rand;
+
+            var obj = {sender: clientId, bagId: rand};
+            console.log("enviando: ", obj);
+            ws.send(JSON.stringify(obj));
+        }, 500);
     </script>
 </body>
 </html>
