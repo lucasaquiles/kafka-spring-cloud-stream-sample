@@ -1,6 +1,5 @@
 package com.lucasaquiles.socket
 
-import com.fasterxml.jackson.databind.util.JSONPObject
 import com.google.gson.Gson
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.socket.WebSocketHandler
@@ -9,7 +8,7 @@ import reactor.core.publisher.Mono
 import reactor.core.publisher.TopicProcessor
 
 data class Event(val sender: Int, val bagId: Int)
-
+data class Location(val event:Event, val lon: Double, val lat: Double)
 
 @Component
 class TrackingHandler : WebSocketHandler {
@@ -26,9 +25,11 @@ class TrackingHandler : WebSocketHandler {
                         .map { ev ->
                             val parts = ev.payloadAsText
 
-
                             var fromJson = gson.fromJson(parts, Event::class.java)
+
                             Event(sender =  fromJson.sender, bagId = fromJson.bagId)
+
+
                         }
                         .log()
                         .doOnNext{ ev -> processor.onNext(ev) }
